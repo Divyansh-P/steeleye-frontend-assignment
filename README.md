@@ -9,9 +9,21 @@
       onClick={onClickHandler(index)}
     >
 ```
-* Syntax error in useState hook in WrappedListComponent
+
+   **correction**
+```
+ <li
+      style={{ backgroundColor: isSelected ? 'green' : 'red'}}
+      onClick={()=>onClickHandler(index)}
+    >
+```
+* Syntax error in useState hook in WrappedListComponent.
 ```
 const [setSelectedIndex, selectedIndex] = useState();
+```
+   **correction**
+```
+  const [selectedIndex,setSelectedIndex] = useState();
 ```
 * Syntax error in WrappedListComponent.propTypes.
 ```
@@ -21,18 +33,44 @@ WrappedListComponent.propTypes = {
   })),
 };
 ```
-* default props are set to null they should have some default value to render initial testing list
+   **correction**
+```
+  WrappedListComponent.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+  })),
+};
+```
+* default props are set to null they should have some default value to render initial testing list.
 ```
 WrappedListComponent.defaultProps = {
   items: null,
 };
 ```
+   **correction**
+```
+WrappedListComponent.defaultProps = {
+  items:[
+    {
+      text:"This is list no. 1"
+    },
+    {
+      text:"This is list no. 2"
+    },  {
+      text:"This is list no. 3"
+    },  {
+      text:"This is list no. 4"
+    },
+  ]
+};
+```
+
 * isSelected is of bool type but we are returning number value.
 * key should be added to every list component that we are generating.
 
 
 ## 3. Please fix, optimize, and/or modify the component as much as you think is necessary.
-**Optimised Code**
+**Optimised/fixed Code**
 ```
 
 import React, { useState, useEffect, memo } from 'react';
